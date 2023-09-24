@@ -88,12 +88,12 @@ public class HandlerConfiguration {
         };
     }
 
-    @Bean
-    public ClientRequestInterceptor interceptor() {
-        return context -> {
-            LOG.info("Request interceptor called!");
-            context.addHeader("X-MY-HEADER", "External Tasks Rock!");
-        };
-    }
+//    @Bean
+//    public ClientRequestInterceptor interceptor() {
+//        return context -> {
+//            LOG.info("Request interceptor called!");
+//            context.addHeader("X-MY-HEADER", "External Tasks Rock!");
+//        };
+//    }
 
 }
