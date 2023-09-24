@@ -16,6 +16,7 @@
  */
 package com.example.demo;
 
+import org.camunda.bpm.client.interceptor.ClientRequestInterceptor;
 import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription;
 import org.camunda.bpm.client.spring.boot.starter.ClientProperties;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
@@ -84,6 +85,14 @@ public class HandlerConfiguration {
             Invoice invoice = (Invoice) typedInvoice.getValue();
             LOG.info("invoiceArchiver Invoice on process scope archived: {}", invoice);
             externalTaskService.complete(externalTask);
+        };
+    }
+
+    @Bean
+    public ClientRequestInterceptor interceptor() {
+        return context -> {
+            LOG.info("Request interceptor called!");
+            context.addHeader("X-MY-HEADER", "External Tasks Rock!");
         };
     }
 
