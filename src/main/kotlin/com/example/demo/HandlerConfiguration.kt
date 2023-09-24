@@ -16,6 +16,8 @@
  */
 package com.example.demo
 
+import org.camunda.bpm.client.interceptor.ClientRequestContext
+import org.camunda.bpm.client.interceptor.ClientRequestInterceptor
 import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription
 import org.camunda.bpm.client.spring.boot.starter.ClientProperties
 import org.camunda.bpm.client.task.ExternalTask
@@ -28,7 +30,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.util.*
-import kotlin.collections.HashMap
 
 @Configuration
 class HandlerConfiguration(properties: ClientProperties) {
@@ -55,13 +56,12 @@ class HandlerConfiguration(properties: ClientProperties) {
             variables["invoice"] = invoiceValue
 
             // select the scope of the variables
-            externalTaskService.complete(externalTask, variables)
-//            val isRandomSample = Math.random() <= 0.5
-//            if (isRandomSample) {
-//                externalTaskService.complete(externalTask, variables)
-//            } else {
-//                externalTaskService.complete(externalTask, null, variables)
-//            }
+            val isRandomSample = Math.random() <= 0.5
+            if (isRandomSample) {
+                externalTaskService.complete(externalTask, variables)
+            } else {
+                externalTaskService.complete(externalTask, null, variables)
+            }
             logger?.info("{}: invoiceCreator The External Task {} has been completed!",  workerId, externalTask.id)
         }
     }
@@ -91,6 +91,14 @@ class HandlerConfiguration(properties: ClientProperties) {
                 externalTask.id,
                 score
             )
+        }
+    }
+
+    @Bean
+    fun interceptor(): ClientRequestInterceptor {
+        return ClientRequestInterceptor { context: ClientRequestContext ->
+            logger?.info("Request interceptor called!")
+            context.addHeader("X-MY-HEADER", "External Tasks Rock!")
         }
     }
 
