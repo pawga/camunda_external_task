@@ -6,17 +6,15 @@
 
     <groupId>com.example</groupId>
     <artifactId>order-handling-spring-boot</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <packaging>jar</packaging>
 
     <properties>
         <camunda.platform.version>7.18.0</camunda.platform.version>
-        <spring.boot.version>3.1.1</spring.boot.version>
-        <graaljs.version>21.1.0</graaljs.version>
+        <spring.boot.version>3.1.4</spring.boot.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <java.version>17</java.version>
-        <jaxb-api.version>2.3.1</jaxb-api.version>
     </properties>
 
     <dependencyManagement>
@@ -40,6 +38,7 @@
     </dependencyManagement>
 
     <dependencies>
+
         <dependency>
             <groupId>org.camunda.bpm.springboot</groupId>
             <artifactId>camunda-bpm-spring-boot-starter-external-task-client</artifactId>
