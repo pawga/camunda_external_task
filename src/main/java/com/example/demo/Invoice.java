@@ -24,6 +24,9 @@ public class Invoice {
         this.id = id;
     }
 
+    public Invoice() {
+    }
+
     @Override
     public String toString() {
         return "Invoice [id=" + id + "]";

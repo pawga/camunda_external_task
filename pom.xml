@@ -14,6 +14,7 @@
         <camunda.platform.version>7.18.0</camunda.platform.version>
         <spring.boot.version>3.1.4</spring.boot.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <glassfish.jaxb.version>2.3.3</glassfish.jaxb.version>
         <java.version>17</java.version>
     </properties>
 
@@ -23,16 +24,8 @@
                 <groupId>org.camunda.bpm</groupId>
                 <artifactId>camunda-bom</artifactId>
                 <version>${camunda.platform.version}</version>
-                <scope>import</scope>
                 <type>pom</type>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
                 <scope>import</scope>
-                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -44,6 +37,12 @@
             <artifactId>camunda-bpm-spring-boot-starter-external-task-client</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>${glassfish.jaxb.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -52,6 +51,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
