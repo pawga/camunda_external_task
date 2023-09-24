@@ -20,30 +20,14 @@ import org.camunda.bpm.client.spring.SpringTopicSubscription;
 import org.camunda.bpm.client.spring.event.SubscriptionInitializedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 
 @Component
 public class Subscriptions implements ApplicationListener<SubscriptionInitializedEvent> {
 
     protected static final Logger LOG = LoggerFactory.getLogger(Subscriptions.class);
-
-    @Autowired
-    public SpringTopicSubscription invoiceCreatorHandlerSubscription;
-
-    @Autowired
-    public SpringTopicSubscription invoiceArchiverHandlerSubscription;
-
-    @PostConstruct
-    public void listSubscriptionBeans() {
-        LOG.info("Subscription bean 'invoiceCreatorHandlerSubscription' has topic name: {} ",
-                invoiceCreatorHandlerSubscription.getTopicName());
-        LOG.info("Subscription bean 'invoiceArchiverHandlerSubscription' has topic name: {} ",
-                invoiceArchiverHandlerSubscription.getTopicName());
-    }
 
     @Override
     public void onApplicationEvent(SubscriptionInitializedEvent event) {
