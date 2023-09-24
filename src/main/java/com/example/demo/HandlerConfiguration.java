@@ -17,6 +17,7 @@
 package com.example.demo;
 
 import org.camunda.bpm.client.spring.annotation.ExternalTaskSubscription;
+import org.camunda.bpm.client.spring.boot.starter.ClientProperties;
 import org.camunda.bpm.client.task.ExternalTaskHandler;
 import org.camunda.bpm.client.variable.ClientValues;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
@@ -33,6 +34,12 @@ import java.util.Map;
 public class HandlerConfiguration {
 
     protected static final Logger LOG = LoggerFactory.getLogger(HandlerConfiguration.class);
+
+    protected String workerId;
+
+    public HandlerConfiguration(ClientProperties properties) {
+        workerId = properties.getWorkerId();
+    }
 
     @Bean
     @ExternalTaskSubscription("invoiceCreator")
