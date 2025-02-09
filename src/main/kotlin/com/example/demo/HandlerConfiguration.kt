@@ -53,9 +53,7 @@ class HandlerConfiguration(properties: ClientProperties) {
             // add the invoice object and its id to a map
             val variables: MutableMap<String, Any> = HashMap()
             variables["invoiceId"] = invoice.id ?: "empty"
-//            variables["invoice"] = invoiceValue // todo bug in micronaut serialization
-            variables["invoice"] = invoice.toString() // todo for micronaut
-
+            variables["invoice"] = invoiceValue
             // select the scope of the variables
             val isRandomSample = Math.random() <= 0.5
             if (isRandomSample) {
